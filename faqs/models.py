@@ -2,7 +2,7 @@ from django.db import models, transaction
 from ckeditor.fields import RichTextField
 from .languages import SUPPORTED_LANGUAGES  # Import from the parent directory
 from .utils import translate_text
-from ..redis_handler import RedisHandler
+from .redis_handler import RedisHandler
 
 redis_handler = RedisHandler()
 
