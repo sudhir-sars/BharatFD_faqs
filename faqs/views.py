@@ -192,4 +192,8 @@ def home_page_view(request):
             }
         )
 
-    return render(request, "faqs/home.html", {"faqs": faq_list, "page_obj": page_obj, "lang": lang})
+    return render(
+        request,
+        "faqs/home.html",
+        {"faqs": faq_list, "page_obj": page_obj, "lang": lang},
+    )
