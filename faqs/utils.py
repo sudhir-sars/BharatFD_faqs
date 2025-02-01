@@ -1,15 +1,22 @@
+# In utils.py
 from googletrans import Translator
-from .languages import SUPPORTED_LANGUAGES
 
 translator = Translator()
 
-def translate_text(target: str, text: str) -> str:
-    if target not in SUPPORTED_LANGUAGES:
-        return f"Error: Unsupported language '{target}'"
 
+def translate_text(lang, text):
     try:
-        translation = translator.translate(text, dest=target)
-        return translation.text
+        # Ensure that the input is not empty
+        if not text:
+            return text
+
+        translation = translator.translate(text, dest=lang)
+
+        # Handle the case where translation.text might be None
+        if translation.text and translation.text.strip() != "":
+            return translation.text
+        else:
+            return text
     except Exception as e:
-        print(f"Translation Error ({target}): {e}")
+        print(f"Translation Error ({lang}): {e}")
         return text

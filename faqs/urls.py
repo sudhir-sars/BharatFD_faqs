@@ -1,7 +1,7 @@
 from django.urls import path
-from .views import FAQListAPI, faq_list_view
+from .views import FAQListAPIView, FAQDetailAPIView
 
 urlpatterns = [
-    path('faqs/', FAQListAPI.as_view(), name='faq-list-api'),
-    path('view/', faq_list_view, name='faq-list-view'),
+    path("faqs/", FAQListAPIView.as_view(), name="faq-list-api"),
+    path("faqs/<int:pk>/", FAQDetailAPIView.as_view(), name="faq-detail-api"),
 ]
