@@ -1,0 +1,30 @@
+<!-- faqs/templates/faqs/faq_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FAQs</title>
+    <!-- Include Bootstrap CSS from a CDN -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="container my-5">
+      <h1>Frequently Asked Questions</h1>
+      <div id="faq-container" class="mt-4">
+        {% for faq in faqs %}
+        <div class="card mb-3">
+          <div class="card-header">{{ faq.question }}</div>
+          <div class="card-body">
+            <p class="card-text">{{ faq.answer|safe }}</p>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    <!-- Include Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

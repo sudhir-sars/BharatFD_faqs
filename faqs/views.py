@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import FAQ
 from .serializers import FAQSerializer
 from django.core.cache import cache
+from django.shortcuts import render
 
 class FAQListAPI(APIView):
     """
@@ -32,3 +33,19 @@ class FAQListAPI(APIView):
         # Cache the data for subsequent calls
         cache.set(cache_key, data, timeout=300)
         return Response(data, status=status.HTTP_200_OK)
+    
+
+def faq_list_view(request):
+    # For simplicity, load all FAQs and use the lang parameter from query string.
+    lang = request.GET.get('lang', 'en')
+    faqs = FAQ.objects.all().order_by('-created_at')
+    
+    # Prepare data with translations.
+    faq_data = []
+    for faq in faqs:
+        faq_data.append({
+            'question': faq.get_translated_field('question', lang),
+            'answer': faq.get_translated_field('answer', lang)
+        })
+    
+    return render(request, 'faqs/faq_list.html', {'faqs': faq_data})
